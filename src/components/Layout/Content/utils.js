@@ -13,6 +13,10 @@ const StyledDocumentTitle = styled(ContentEditable)`
 	}
 `;
 
+const StyledParagraph = styled(ContentEditable)`
+	text-wrap: auto;
+`;
+
 export const resolveElement = (element, handleOnChange) => {
 	switch (element.type) {
 		case ELEMENT_TYPES.documentTitle: {
@@ -30,7 +34,7 @@ export const resolveElement = (element, handleOnChange) => {
 		}
 		case ELEMENT_TYPES.p: {
 			return (
-				<ContentEditable
+				<StyledParagraph
 					key={element.id}
 					onChange={(event) => {
 						handleOnChange(element.id, event.nativeEvent.target.textContent);
