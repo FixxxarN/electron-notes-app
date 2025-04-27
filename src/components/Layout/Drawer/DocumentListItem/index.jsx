@@ -1,13 +1,20 @@
 import { StyledListItem } from './styles';
+import useHovering from '../../../hooks/useHovering';
 
 const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
+	const { hovering, handleMouseEnter, handleMouseLeave } = useHovering();
+
 	if (!document) return null;
 
 	const documentName =
 		Object.values(document.elements)[0].content || 'New document';
 
 	return (
-		<StyledListItem onClick={() => selectDocument(document.id)}>
+		<StyledListItem
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+			onClick={() => selectDocument(document.id)}
+		>
 			<p
 				style={{
 					textOverflow: 'ellipsis',
@@ -18,6 +25,7 @@ const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 				{documentName}
 			</p>
 			<button
+				style={{ visibility: hovering ? 'visible' : 'hidden' }}
 				onClick={(event) => {
 					event.stopPropagation();
 					deleteDocument(document.id);
