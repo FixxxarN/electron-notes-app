@@ -1,6 +1,14 @@
 import { StyledListItem } from './styles';
 import useHovering from '../../../hooks/useHovering';
 
+const formatDateAndTime = (createdDate) => {
+	const date = new Date(createdDate).toISOString().split('T')[0];
+	const hours = createdDate.getHours();
+	const minutes = createdDate.getMinutes();
+
+	return `${date} ${hours}:${minutes}`;
+};
+
 const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 	const { hovering, handleMouseEnter, handleMouseLeave } = useHovering();
 
@@ -15,15 +23,20 @@ const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 			onMouseLeave={handleMouseLeave}
 			onClick={() => selectDocument(document.id)}
 		>
-			<p
-				style={{
-					textOverflow: 'ellipsis',
-					overflow: 'hidden',
-					whiteSpace: 'nowrap',
-				}}
-			>
-				{documentName}
-			</p>
+			<div>
+				<p
+					style={{
+						textOverflow: 'ellipsis',
+						overflow: 'hidden',
+						whiteSpace: 'nowrap',
+					}}
+				>
+					{documentName}
+				</p>
+				<p>
+					{document.created && formatDateAndTime(new Date(document.created))}
+				</p>
+			</div>
 			<button
 				style={{ visibility: hovering ? 'visible' : 'hidden' }}
 				onClick={(event) => {

@@ -55,6 +55,7 @@ const handleAddNewDocument = async (userDataPath) => {
 
 	const newDocument = {
 		id: randomUUID(),
+		created: new Date(),
 		elements: [
 			{
 				id: randomUUID(),

@@ -1,17 +1,11 @@
 import ContentEditable from 'react-contenteditable';
 import styled from 'styled-components';
+import DocumentTitle from '../../Common/Elements/DocumentTitle/index.jsx';
 
 const ELEMENT_TYPES = {
 	documentTitle: 'documentTitle',
 	p: 'p',
 };
-
-const StyledDocumentTitle = styled(ContentEditable)`
-	&&[contentEditable='true']:empty:before {
-		content: attr(data-placeholder);
-		color: #a2a2a2;
-	}
-`;
 
 const StyledParagraph = styled(ContentEditable)`
 	text-wrap: auto;
@@ -21,14 +15,10 @@ export const resolveElement = (element, handleOnChange) => {
 	switch (element.type) {
 		case ELEMENT_TYPES.documentTitle: {
 			return (
-				<StyledDocumentTitle
+				<DocumentTitle
 					key={element.id}
-					onChange={(event) => {
-						handleOnChange(element.id, event.nativeEvent.target.textContent);
-					}}
-					html={element.content}
-					data-placeholder="New document"
-					tagName="h1"
+					element={element}
+					handleOnChange={handleOnChange}
 				/>
 			);
 		}
