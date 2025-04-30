@@ -5,4 +5,6 @@ export const StyledButton = styled.button`
 	border-radius: 5px;
 	width: 100%;
 	padding: 0.5rem;
+	background: #303030;
+	color: #eee;
 `;

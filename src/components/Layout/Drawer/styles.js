@@ -7,7 +7,9 @@ export const StyledDrawer = styled.div`
 	height: 100%;
 	min-width: 200px;
 	max-width: 200px;
-	box-shadow: inset 0px 0px 1px 0px #a2a2a2;
+	background: #252525;
+	color: #eee;
+	box-shadow: inset 0px 0px 1px 0px #808080;
 	padding: 0.5rem;
 	box-sizing: border-box;
 	overflow-y: auto;

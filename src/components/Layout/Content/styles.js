@@ -6,4 +6,6 @@ export const StyledContent = styled.div`
 	padding: 0.5rem;
 	box-sizing: border-box;
 	overflow-y: auto;
+	background: #252525;
+	color: #eee;
 `;

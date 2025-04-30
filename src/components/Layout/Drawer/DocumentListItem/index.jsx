@@ -1,14 +1,6 @@
 import { StyledListItem } from './styles';
 import useHovering from '../../../hooks/useHovering';
 
-const formatDateAndTime = (createdDate) => {
-	const date = new Date(createdDate).toISOString().split('T')[0];
-	const hours = createdDate.getHours();
-	const minutes = createdDate.getMinutes();
-
-	return `${date} ${hours}:${minutes}`;
-};
-
 const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 	const { hovering, handleMouseEnter, handleMouseLeave } = useHovering();
 
@@ -23,7 +15,14 @@ const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 			onMouseLeave={handleMouseLeave}
 			onClick={() => selectDocument(document.id)}
 		>
-			<div>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					width: '100%',
+					overflow: 'hidden',
+				}}
+			>
 				<p
 					style={{
 						textOverflow: 'ellipsis',
@@ -34,18 +33,27 @@ const DocumentListItem = ({ document, selectDocument, deleteDocument }) => {
 					{documentName}
 				</p>
 				<p>
-					{document.created && formatDateAndTime(new Date(document.created))}
+					{document.created &&
+						new Date(document.created).toLocaleString([], {
+							year: 'numeric',
+							month: 'numeric',
+							day: 'numeric',
+							hour: '2-digit',
+							minute: '2-digit',
+						})}
 				</p>
 			</div>
-			<button
-				style={{ visibility: hovering ? 'visible' : 'hidden' }}
-				onClick={(event) => {
-					event.stopPropagation();
-					deleteDocument(document.id);
-				}}
-			>
-				Delete
-			</button>
+			<div style={{ padding: '0.25rem' }}>
+				<button
+					style={{ visibility: hovering ? 'visible' : 'hidden' }}
+					onClick={(event) => {
+						event.stopPropagation();
+						deleteDocument(document.id);
+					}}
+				>
+					Delete
+				</button>
+			</div>
 		</StyledListItem>
 	);
 };
